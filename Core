@@ -1,0 +1,49 @@
+programname = "Password Strengthener"
+creator = "Joshane Walsh"
+date = "9/13/2025"
+version = "1.0"
+description = "This program takes user entries and encrypts it. This is done while staying true to entry length"
+print()
+print(f"Program Name: {programname}")
+print(f"Creator: {creator}")
+print(f"Date: {date}")
+print(f"Version: {version}")
+print(f"Description: {description}")
+import random
+import string
+
+def obfuscate_text(input_text):
+    """
+    Transforms input text into a randomized, password-style string.
+    Preserves length and basic word structure.
+    """
+    output = []
+    for word in input_text.split():
+        new_word = []
+        for char in word:
+            if char.isalpha():
+                # Randomly choose a letter, number, or symbol
+                choice = random.choice([
+                    random.choice(string.ascii_letters),
+                    random.choice(string.digits),
+                    random.choice("!@#$%^&*()-_=+")
+                ])
+                new_word.append(choice)
+            else:
+                new_word.append(char)  # Preserve punctuation
+        output.append(''.join(new_word))
+    return ' '.join(output)
+
+def main():
+    print("Text Encryption V1")
+    while True:
+        user_input = input("Enter text to encrypt: ")
+        encrypted = obfuscate_text(user_input)
+        print(f"\nEncrypted Output:\n{encrypted}")
+
+        again = input("Do you want to continue? (yes/no): ").strip().lower()
+        if again not in ['yes', 'y']:
+            print("Exiting Program.")
+            break
+if __name__ == "__main__":
+    main()
